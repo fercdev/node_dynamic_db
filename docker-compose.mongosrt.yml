@@ -8,9 +8,6 @@ services:
       MONGO_INITDB_DATABASE: database
     ports:
       - 27017:27017
-    volumes:
-      - ./data/mongo.json:/data/data.json:ro
-      - ./script/initdb.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
   mongo-worker:
     image: mongo
     container_name: db_mongo_worker
@@ -28,6 +25,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: express_node
     environment:
       MY_DATABASE_DRIVER: "mongo"
       DB_HOST: mongo
