@@ -22,6 +22,10 @@ const driver = new drivers[process.env.MY_DATABASE_DRIVER]({
 (async () => {
     await driver.connect();
 
+    app.get('/', (req, res) => {
+        return res.send('Hola node dynamic')
+    })
+
     app.get('/users', async (req, res) => {
         const users = await driver.getAllUsers();
         res.json(users);
